@@ -1,0 +1,21 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 1.4.0
+_src_path: gh:algorandfoundation/algokit-beaker-default-template
+algod_port: 4001
+algod_server: http://localhost
+algod_token: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+author_email: ''
+author_name: ''
+deployment_language: python
+ide_vscode: true
+indexer_port: 8980
+indexer_server: http://localhost
+indexer_token: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+project_name: box_test
+python_linter: flake8
+use_github_actions: false
+use_python_black: true
+use_python_mypy: true
+use_python_pip_audit: false
+use_python_pytest: true
+
