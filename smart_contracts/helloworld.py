@@ -80,7 +80,7 @@ def hello(name: pt.abi.String, *, output: pt.abi.Uint64) -> pt.Expr:
     # element = pt.ScratchVar(pt.TealType.uint64)
     # l = pt.ScratchVar(pt.TealType.uint64)
     # j = pt.ScratchVar(pt.TealType.uint64)
-    total_sum_ = calc_ln(pt.Int(2000000), aValues.__getitem__(0))
+    total_sum_ = calc_ln(pt.Int(2000000), aValues.__getitem__(0), xValues.__getitem__(0))
 
     return pt.Seq(
         # total_sum.store(my_for(my_array.__getitem__(0))),
@@ -121,26 +121,26 @@ def my_for(my_array):
     return total_sum
 
 
-def calc_ln(a, array):
+def calc_ln(a, aval, xval):
     startIndex = 0  # pt.Int(0)
     left = 0  # pt.Int(0)
-    arr_len = len(array)
+    arr_len = len(aval)
     right = arr_len - 1  # pt.Int(arr_len) - pt.Int(1)
     mid = 0  # pt.Int(0)
     sum = pt.Int(0)
 
     while left <= right:
         mid = math.floor((left + right) / 2)
-        if a >= array[mid]:
+        if a >= aval[mid]:
             startIndex = mid  # pt.Int(mid)
             right = mid - 1  # pt.Int(1)
         else:
             left = mid + 1  # pt.Int(1)
 
-    for i in range(len(array)):
-        if a >= array[i]:
-            a = (a * ONE) / array[i]
-            sum += array[i]
+    for i in range(len(aval)):
+        if a >= aval[i]:
+            a = (a * ONE) / aval[i]
+            sum += xval[i]
 
     z = ((a - ONE) * ONE) / (a + ONE)
     z_squared = (z * z) / ONE

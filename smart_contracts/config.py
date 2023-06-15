@@ -67,11 +67,11 @@ def deploy(
                 transfer(algod_client, transfer_parameters)
 
             name = "world"
-            # response = app_client.hello(name=name)
-            # logger.info(
-            #     f"Called hello on {app_spec.contract.name} ({app_client.app_id}) "
-            #     f"with name={name}, received: {response.return_value}"
-            # )
+            response = app_client.hello(name=name)
+            logger.info(
+                f"Called hello on {app_spec.contract.name} ({app_client.app_id}) "
+                f"with name={name}, received: {response.return_value}"
+            )
         case _:
             raise Exception(
                 f"Attempt to deploy unknown contract {app_spec.contract.name}"

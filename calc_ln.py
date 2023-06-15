@@ -1,6 +1,5 @@
 import math
 
-my_array = [1, 2, 3, 4, 5]
 
 ONE = 1e6
 ONE_12 = 1e12
@@ -30,27 +29,30 @@ a10 = 1015747  # eˆ(x10)
 x11 = 7812  # 2ˆ-7
 a11 = 1007843  # eˆ(x11)
 
+aValues = [a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11]
+xValues = [x0, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11]
 
-def calc_ln(a: int, array: list) -> int:
+
+def calc_ln(a: int) -> int:
     # startIndex = 0  # pt.Int(0)
     left = 0  # pt.Int(0)
-    arr_len = len(array)
+    arr_len = len(aValues)
     right = arr_len - 1  # pt.Int(arr_len) - pt.Int(1)
     mid = 0  # pt.Int(0)
     sum = 0
 
     while left <= right:
         mid = math.floor((left + right) / 2)
-        if a >= array[mid]:
+        if a >= aValues[mid]:
             # startIndex = mid  # pt.Int(mid)
             right = mid - 1  # pt.Int(1)
         else:
             left = mid + 1  # pt.Int(1)
 
-    for i in range(len(array)):
-        if a >= array[i]:
-            a = (a * ONE) / array[i]
-            sum += array[i]
+    for i in range(len(aValues)):
+        if a >= aValues[i]:
+            a = (a * ONE) / aValues[i]
+            sum += xValues[i]
 
     z = ((a - ONE) * ONE) / (a + ONE)
     z_squared = (z * z) / ONE
@@ -79,4 +81,4 @@ def calc_ln(a: int, array: list) -> int:
     return xxx
 
 
-print(calc_ln(2000000, my_array))
+print(calc_ln(2000000))
