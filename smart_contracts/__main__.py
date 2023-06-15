@@ -1,6 +1,7 @@
 import logging
 import sys
 from pathlib import Path
+sys.setrecursionlimit(30000)
 
 from dotenv import load_dotenv
 

@@ -34,7 +34,7 @@ xValues = [x0, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11]
 
 
 def calc_ln(a: int) -> int:
-    # startIndex = 0  # pt.Int(0)
+    startIndex = 0  # pt.Int(0)
     left = 0  # pt.Int(0)
     arr_len = len(aValues)
     right = arr_len - 1  # pt.Int(arr_len) - pt.Int(1)
@@ -49,7 +49,8 @@ def calc_ln(a: int) -> int:
         else:
             left = mid + 1  # pt.Int(1)
 
-    for i in range(len(aValues)):
+    for i in range(startIndex, len(aValues)):
+    # for (let i = startIndex; i < aValues.length; i++):
         if a >= aValues[i]:
             a = (a * ONE) / aValues[i]
             sum += xValues[i]

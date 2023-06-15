@@ -74,13 +74,13 @@ xValues = (
 
 
 @app.external
-def hello(name: pt.abi.String, *, output: pt.abi.Uint64) -> pt.Expr:
+def hello(name: pt.abi.Uint64, *, output: pt.abi.Uint64) -> pt.Expr:
     # Exp
     total_sum = pt.ScratchVar(pt.TealType.uint64)
     # element = pt.ScratchVar(pt.TealType.uint64)
     # l = pt.ScratchVar(pt.TealType.uint64)
     # j = pt.ScratchVar(pt.TealType.uint64)
-    total_sum_ = calc_ln(pt.Int(2000000), aValues.__getitem__(0), xValues.__getitem__(0))
+    total_sum_ = calc_ln(name.get(), aValues.__getitem__(0), xValues.__getitem__(0))
 
     return pt.Seq(
         # total_sum.store(my_for(my_array.__getitem__(0))),
@@ -112,13 +112,13 @@ def hello(name: pt.abi.String, *, output: pt.abi.Uint64) -> pt.Expr:
     # output.set(my_array.__getitem__(0)[0]),
 
 
-def my_for(my_array):
-    element = pt.Int(0)
-    total_sum = pt.Int(0)
-    for i in range(5):
-        element = my_array[i]
-        total_sum = total_sum + element
-    return total_sum
+# def my_for(my_array):
+#     element = pt.Int(0)
+#     total_sum = pt.Int(0)
+#     for i in range(5):
+#         element = my_array[i]
+#         total_sum = total_sum + element
+#     return total_sum
 
 
 def calc_ln(a, aval, xval):
@@ -137,12 +137,14 @@ def calc_ln(a, aval, xval):
         else:
             left = mid + 1  # pt.Int(1)
 
-    for i in range(len(aval)):
+    for i in range(startIndex, len(aval)):
         if a >= aval[i]:
             a = (a * ONE) / aval[i]
+            # a -= pt.Int(1)
             sum += xval[i]
 
-    z = ((a - ONE) * ONE) / (a + ONE)
+    _a = a - ONE
+    z = (_a * ONE) / (a + ONE)
     z_squared = (z * z) / ONE
     num = z
     seriesSum = num
@@ -164,6 +166,4 @@ def calc_ln(a, aval, xval):
 
     seriesSum *= pt.Int(2)
 
-    xxx = sum + seriesSum
-
-    return xxx
+    return seriesSum

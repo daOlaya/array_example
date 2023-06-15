@@ -66,7 +66,7 @@ def deploy(
                 )
                 transfer(algod_client, transfer_parameters)
 
-            name = "world"
+            name = 2000000
             response = app_client.hello(name=name)
             logger.info(
                 f"Called hello on {app_spec.contract.name} ({app_client.app_id}) "
